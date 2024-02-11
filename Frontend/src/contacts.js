@@ -1,13 +1,18 @@
 import axios from 'axios';
+import { matchSorter } from "match-sorter";
+import sortBy from "sort-by";
 
 const BASE_URL = 'http://localhost:3000'; // Update with your backend URL
 
 // Function to retrieve contacts from the backend based on a query
 export async function getContacts(query) {
-    const response = await axios.get(`${BASE_URL}/contacts`, {
-      params: { query }
-    });
-    return response.data;
+  let response = await axios.get(BASE_URL + "/contacts");
+  let contacts = response.data;
+  if (!contacts) contacts = [];
+  if (query) {
+    contacts = matchSorter(contacts, query, { keys: ["first", "last"] });
+  }
+  return contacts.sort(sortBy("last", "createdAt"));
 }
 
 // Function to create a new contact
