@@ -16,7 +16,7 @@ touch Backend/.env
 # default database url
 MONGO_URI=mongodb://localhost:27017/*YourDatabaseName*
 ```
-- Default API port is 3000. It can be modified in Frontend/src/contacts.js
+- Default API port is 3000. It can be modified in `Frontend/src/contacts.js`
 
 ```js
 const BASE_URL = 'http://localhost:3000'; // Update with your backend URL
